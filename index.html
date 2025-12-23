@@ -30,6 +30,7 @@
         <div class="actions">
           <button id="add-player">添加玩家</button>
           <button id="draw-entry">抽入口顺序</button>
+          <button id="start-game" class="ghost">发牌并开始</button>
           <button id="advance-turn" class="ghost">下一位玩家</button>
         </div>
       </div>
@@ -44,8 +45,35 @@
       </div>
       <div class="board-wrapper">
         <div id="board" aria-live="polite"></div>
-        <aside class="cell-detail" id="cell-detail">
-          <p class="muted">点击任意格子查看详情。</p>
+        <aside class="side-column">
+          <div class="map-image" id="map-image">
+            <p class="muted">自动生成的地图总览（可右键保存）：</p>
+            <img alt="地图预览" id="map-preview" />
+          </div>
+          <div class="cell-detail" id="cell-detail">
+            <p class="muted">点击任意格子查看详情。</p>
+          </div>
+          <div class="turn-box">
+            <div class="turn-header">
+              <div>
+                <p class="eyebrow">当前行动玩家</p>
+                <h3 id="turn-player">—</h3>
+              </div>
+              <div class="deck-stats" id="deck-stats"></div>
+            </div>
+            <div class="hand" id="hand"></div>
+            <div class="turn-actions">
+              <button id="draw-card">抽一张牌</button>
+              <button id="end-turn" class="ghost">结束回合</button>
+            </div>
+          </div>
+          <div class="log-box">
+            <div class="panel-header">
+              <h3>行动记录</h3>
+              <button id="clear-log" class="ghost">清空</button>
+            </div>
+            <ol id="log"></ol>
+          </div>
         </aside>
       </div>
     </section>
@@ -80,6 +108,6 @@
     <p>本页面完全在本地运行，不依赖外部网络，适合桌游测试时快速查看与记录。</p>
   </footer>
 
-  <script type="module" src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
