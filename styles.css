@@ -182,6 +182,7 @@ button.ghost {
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
 }
 
+
 .map-image {
   background: var(--card);
   border: 1px solid var(--border);
@@ -196,6 +197,7 @@ button.ghost {
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.04);
 }
+
 
 .side-column { display: flex; flex-direction: column; gap: 12px; }
 .turn-box, .log-box {

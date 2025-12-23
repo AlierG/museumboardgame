@@ -180,7 +180,10 @@ const handEl = document.getElementById('hand');
 const deckStatsEl = document.getElementById('deck-stats');
 const logEl = document.getElementById('log');
 const turnPlayerEl = document.getElementById('turn-player');
+
 const mapPreviewEl = document.getElementById('map-preview');
+
+
 
 function parseCount(title) {
   const match = title.match(/×(\d+)/);
