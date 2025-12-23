@@ -1,4 +1,84 @@
-import { boardGrid } from './board-data.js';
+// 将地图数据直接内嵌，方便本地直接双击 HTML 运行
+const boardGrid = [
+  ["", "", "E", "D", "出入口", "C", "B", "A"],
+  [
+    "A",
+    "无障碍厕所（可被占用，可被损坏）效果与同名卡牌一致，激活效果时先询问其他玩家有没有“占用”“损坏”的反制卡，如果打出则这个厕所无效化",
+    "休息区域，若你打出【轮椅席位】可从弃牌堆中回收一张已打出的卡，但如果进行此操作，则本回合无法打出【前进卡】",
+    "互动体验区，选择任意一个对手，各自从对方手牌中随机挑选2张卡牌，背面朝上进行交换",
+    "（玩家第一回合进入游戏所在格）购票台，办理换票，本回合无法打出【前进卡】，若打出【低位服务设施】则不受此限制，且可额外前进一格",
+    "触觉地图，获得一张【无障碍电梯】，本回合无法打出【前进卡】",
+    "文创商店，丢弃手中任意数量的卡，并抽取等量卡，本回合无法打出卡牌",
+    "无障碍厕所（可被占用，可被损坏）效果与同名卡牌一致，激活效果时先询问其他玩家有没有“占用”“损坏”的反制卡，如果打出则这个厕所无效化"
+  ],
+  [
+    "B",
+    "文创商店，丢弃手中任意数量的卡，并抽取等量卡，本回合无法打出卡牌",
+    "随机事件（抽取随机事件卡并执行）",
+    "参观展品C",
+    "随机事件（抽取随机事件卡并执行）",
+    "无障碍通道（可被占用），激活时先询问其他玩家有没有“无障碍设施占用”的反制卡，若打出则本回合无法打出【前进卡】（除非用“找管理者反馈“再抵消）",
+    "随机事件（抽取随机事件卡并执行）",
+    "休息区域，若你打出【轮椅席位】可从弃牌堆中回收一张已打出的卡，但如果进行此操作，则本回合无法打出【前进卡】",
+    "E"
+  ],
+  [
+    "C",
+    "触觉地图，获得一张【无障碍电梯】，本回合无法打出【前进卡】",
+    "无障碍通道（可被占用），激活时先询问其他玩家有没有“无障碍设施占用”的反制卡，若打出则本回合无法打出【前进卡】（除非用“找管理者反馈“再抵消）",
+    "随机事件（抽取随机事件卡并执行）",
+    "楼层转换，到达此格后，如果要前进到展品E处，需打出“无障碍电梯”“斜挂梯”“升降平台”“强壮好心人”其中的任意一张能让你楼层转换的牌并且成功生效，才可以通过【前进卡】到达展品E，否则【前进卡】只能选择E以外的方向前进。参观完展品E，从展品E方向前进到此格后，也需要满足上述操作才能“下楼”前往展品E以外的其他方向。",
+    "随机事件（抽取随机事件卡并执行）",
+    "参观展品B",
+    "互动体验区，选择任意一个对手，各自从对方手牌中随机挑选2张卡牌，背面朝上进行交换",
+    "D"
+  ],
+  [
+    "出入口",
+    "（玩家第一回合进入游戏所在格）购票台，办理换票，本回合无法打出【前进卡】，若打出【低位服务设施】则不受此限制，且可额外前进一格",
+    "随机事件（抽取随机事件卡并执行）",
+    "楼层转换，到达此格后，如果要前进到展品E处，需打出“无障碍电梯”“斜挂梯”“升降平台”“强壮好心人”其中的任意一张能让你楼层转换的牌并且成功生效，才可以通过【前进卡】到达展品E，否则【前进卡】只能选择E以外的方向前进。参观完展品E，从展品E方向前进到此格后，也需要满足上述操作才能“下楼”前往展品E以外的其他方向。",
+    "参观展品E",
+    "楼层转换，到达此格后，如果要前进到展品E处，需打出“无障碍电梯”“斜挂梯”“升降平台”“强壮好心人”其中的任意一张能让你楼层转换的牌并且成功生效，才可以通过【前进卡】到达展品E，否则【前进卡】只能选择E外的方向前进。参观完展品E，从展品E方向前进到此格后，也需要满足上述操作才能“下楼”前往展品E以外的其他方向。",
+    "随机事件（抽取随机事件卡并执行）",
+    "（玩家第一回合进入游戏所在格）购票台，办理换票，本回合无法打出【前进卡】，若打出【低位服务设施】则不受此限制，且可额外前进一格",
+    "出入口"
+  ],
+  [
+    "D",
+    "互动体验区，选择任意一个对手，各自从对方手牌中随机挑选2张卡牌，背面朝上进行交换",
+    "参观展品D",
+    "随机事件（抽取随机事件卡并执行）",
+    "楼层转换，到达此格后，如果要前进到展品E处，需打出“无障碍电梯”“斜挂梯”“升降平台”“强壮好心人”其中的任意一张能让你楼层转换的牌并且成功生效，才可以通过【前进卡】到达展品E，否则【前进卡】只能选择E以外的方向进。参观完展品E，从展品E方向前进到此格后，也需要满足上述操作才能“下楼”前往展品E以外的其他方向。",
+    "随机事件（抽取随机事件卡并执行）",
+    "无障碍通道（可被占用），激活时先询问其他玩家有没有“无障碍设施占用”的反制卡，若打出则本回合无法打出【前进卡】（除非用“找管理者反馈“再抵消）",
+    "触觉地图，获得一张【无障碍电梯】，本回合无法打出【前进卡】",
+    "C"
+  ],
+  [
+    "E",
+    "休息区域，若你打出【轮椅席位】可从弃牌堆中回收一张已打出的卡，但如果进行此操作，则本回合无法打出【前进卡】",
+    "随机事件（抽取随机事件卡并执行）",
+    "无障碍通道（可被占用），激活时先询问其他玩家有没有“无障碍设施占用”的反制卡，若打出则本回合无法打出【前进卡】（除非用“找管理者反馈“再抵消）",
+    "随机事件（抽取随机事件卡并执行）",
+    "参观展品A",
+    "随机事件（抽取随机事件卡并执行）",
+    "文创商店，丢弃手中任意数量的卡，并抽取等量卡，本回合无法打出卡牌",
+    "B"
+  ],
+  [
+    "",
+    "无障碍厕所（可被占用，可被损坏）效果与同名卡牌一致，激活效果时先询问其他玩家有没有“占用”“损坏”的反制卡，如果打出则这个厕所无效化",
+    "文创商店，丢弃手中任意数量的卡，并抽取等量卡，本回合无法打出卡牌",
+    "触觉地图，获得一张【无障碍电梯】，本回合无法打出【前进卡】",
+    "（玩家第一回合进入游戏所在格）购票台，办理换票，本回合无法打出【前进卡】，若打出【低位服务设施】则不受此限制，且可额外前进一格",
+    "互动体验区，选择任意一个对手，各自从对方手牌中随机挑选2张卡牌，背面朝上进行交换",
+    "休息区域，若你打出【轮椅席位】可从弃牌堆中回收一张已打出的卡，但如果进行此操作，则本回合无法打出【前进卡】",
+    "无障碍厕所（可被占用，可被损坏）效果与同名卡牌一致，激活效果时先询问其他玩家有没有“占用”“损坏”的反制卡，如果打出则这个厕所无效化",
+    "A"
+  ],
+  ["", "A", "B", "C", "出入口", "D", "E"]
+];
 
 const entryCards = [
   { title: '平坡入口', order: 1, note: '没有高差，顺利通行。' },
@@ -100,6 +180,10 @@ const handEl = document.getElementById('hand');
 const deckStatsEl = document.getElementById('deck-stats');
 const logEl = document.getElementById('log');
 const turnPlayerEl = document.getElementById('turn-player');
+
+const mapPreviewEl = document.getElementById('map-preview');
+
+
 
 function parseCount(title) {
   const match = title.match(/×(\d+)/);
@@ -453,6 +537,92 @@ function renderBoard() {
 
       boardEl.appendChild(cell);
     });
+  });
+
+  renderMapPreview();
+}
+
+function cellType(text) {
+  if (!text) return 'empty';
+  if (text.includes('出入口')) return 'entry';
+  if (text.includes('随机事件')) return 'event';
+  if (/参观展品/.test(text) || ['A', 'B', 'C', 'D', 'E'].includes(text)) return 'exhibit';
+  if (text.includes('楼层转换')) return 'stairs';
+  if (text.includes('厕所')) return 'toilet';
+  return 'other';
+}
+
+function renderMapPreview() {
+  if (!mapPreviewEl) return;
+  const cellSize = 90;
+  const padding = 16;
+  const maxColumns = Math.max(...boardGrid.map((row) => row.length));
+  const width = maxColumns * cellSize + padding * 2;
+  const height = boardGrid.length * cellSize + padding * 2;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#0f1117';
+  ctx.fillRect(0, 0, width, height);
+  ctx.font = '14px "Noto Sans SC", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  boardGrid.forEach((row, r) => {
+    row.forEach((text, c) => {
+      const x = padding + c * cellSize;
+      const y = padding + r * cellSize;
+      const type = cellType(text);
+      const colorsByType = {
+        empty: '#1c2231',
+        entry: '#2f6bb2',
+        event: '#9956d6',
+        exhibit: '#e7955f',
+        stairs: '#4ba38d',
+        toilet: '#4c7bd8',
+        other: '#222a3a'
+      };
+      ctx.fillStyle = colorsByType[type] || '#222a3a';
+      ctx.strokeStyle = '#39425b';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(x, y, cellSize - 6, cellSize - 6, 12);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#e8ecf5';
+      const label = summarize(text || '空格');
+      wrapText(ctx, label, x + (cellSize - 6) / 2, y + (cellSize - 6) / 2, cellSize - 20, 18);
+    });
+  });
+
+  mapPreviewEl.src = canvas.toDataURL('image/png');
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split('');
+  let line = '';
+  const lines = [];
+  words.forEach((ch) => {
+    const testLine = line + ch;
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > maxWidth && line) {
+      lines.push(line);
+      line = ch;
+    } else {
+      line = testLine;
+    }
+  });
+  lines.push(line);
+
+  const totalHeight = lines.length * lineHeight;
+  let offsetY = y - totalHeight / 2 + lineHeight / 2;
+  lines.forEach((l) => {
+    ctx.fillText(l, x, offsetY);
+    offsetY += lineHeight;
   });
 }
 

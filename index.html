@@ -46,6 +46,12 @@
       <div class="board-wrapper">
         <div id="board" aria-live="polite"></div>
         <aside class="side-column">
+
+          <div class="map-image" id="map-image">
+            <p class="muted">自动生成的地图总览（可右键保存）：</p>
+            <img alt="地图预览" id="map-preview" />
+          </div>
+
           <div class="cell-detail" id="cell-detail">
             <p class="muted">点击任意格子查看详情。</p>
           </div>
@@ -104,6 +110,6 @@
     <p>本页面完全在本地运行，不依赖外部网络，适合桌游测试时快速查看与记录。</p>
   </footer>
 
-  <script type="module" src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
